@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int      @id @default(autoincrement())
+  username        String   @db.VarChar(255)
+  passwordHash    String   @map("password_hash") @db.VarChar(255)
+  role            Int      @db.TinyInt
+  createdBy       Int?     @map("created_by")
+  createdDatetime DateTime @default(now()) @map("created_datetime")
+  updatedDatetime DateTime @default(now()) @updatedAt @map("updated_datetime")
+
+  @@map("users")
+}
+
+model PaperType {
+  id              Int          @id @default(autoincrement())
+  name            String       @db.VarChar(255)
+  gsm             Int?         @db.Int
+  size            String?      @db.VarChar(255)
+  price           Int          @default(0) @db.Int
+  createdBy       Int?         @map("created_by")
+  updatedBy       Int?         @map("updated_by")
+  createdDatetime DateTime     @default(now()) @map("created_datetime")
+  updatedDatetime DateTime     @default(now()) @updatedAt @map("updated_datetime")
+  Inventory       Inventory[]
+  Delivery        Delivery[]
+  Withdrawal      Withdrawal[]
+
+  @@map("paper_types")
+}
+
+model Customer {
+  id              Int          @id @default(autoincrement())
+  name            String       @db.VarChar(255)
+  type            Int          @db.TinyInt
+  contactInfo     String?      @map("contact_info") @db.VarChar(255)
+  createdBy       Int?         @map("created_by")
+  updatedBy       Int?         @map("updated_by")
+  createdDatetime DateTime     @default(now()) @map("created_datetime")
+  updatedDatetime DateTime     @default(now()) @updatedAt @map("updated_datetime")
+  Delivery        Delivery[]
+  Withdrawal      Withdrawal[]
+
+  @@map("customers")
+}
+
+model Inventory {
+  id          Int       @id @default(autoincrement())
+  paperTypeId Int       @map("paper_type_id")
+  PaperType   PaperType @relation(fields: [paperTypeId], references: [id])
+  quantity    Int       @default(0)
+  updatedDate DateTime  @default(now()) @map("updated_date")
+
+  @@map("inventory")
+}
+
+model Delivery {
+  id           Int       @id @default(autoincrement())
+  customerId   Int?      @map("customer_id")
+  Customer     Customer? @relation(fields: [customerId], references: [id])
+  paperTypeId  Int       @map("paper_type_id")
+  PaperType    PaperType @relation(fields: [paperTypeId], references: [id])
+  quantity     Int
+  deliveryDate DateTime  @map("delivery_date")
+  memo         String?   @db.Text
+  createdBy    Int?      @map("created_by")
+  updatedBy    Int?      @map("updated_by")
+  createdDate  DateTime  @default(now()) @map("created_date")
+  updatedDate  DateTime  @default(now()) @updatedAt @map("updated_date")
+
+  @@map("deliveries")
+}
+
+model Withdrawal {
+  id             Int       @id @default(autoincrement())
+  customerId     Int?      @map("customer_id")
+  Customer       Customer? @relation(fields: [customerId], references: [id])
+  paperTypeId    Int       @map("paper_type_id")
+  PaperType      PaperType @relation(fields: [paperTypeId], references: [id])
+  quantity       Int
+  withdrawalDate DateTime  @map("withdrawal_date")
+  price          Int       @default(0)
+  memo           String?   @db.Text
+  createdBy      Int?      @map("created_by")
+  updatedBy      Int?      @map("updated_by")
+  createdDate    DateTime  @default(now()) @map("created_date")
+  updatedDate    DateTime  @default(now()) @updatedAt @map("updated_date")
+}

@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  inventory-management-mysql:
+    image: mysql:8
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./mysql/.data:/var/lib/mysql
+      - ./mysql/initdb:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: inventory_management
+      MYSQL_ROOT_PASSWORD: B5D6JnSneir5qA4m
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default_authentication_plugin=mysql_native_password
+    networks:
+      - inventory_management-network
+    container_name: inventory-management-mysql
+
+networks:
+  inventory_management-network:
