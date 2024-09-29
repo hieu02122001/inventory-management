@@ -1,7 +1,8 @@
 {
   "name": "inventory-management",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "type": "module",
   "repository": "git@github.com:hieu02122001/inventory-management.git",
   "author": "Trung Hiếu Văn <trunghieuvan02@gmail.com>",
   "license": "MIT",
@@ -10,17 +11,26 @@
     "dcc:up": "yarn dcc up -d",
     "dcc:down": "yarn dcc down",
     "prisma:migrate": "yarn prisma migrate dev --schema=./prisma/schema.prisma",
-    "prisma:generate": "yarn prisma generate --schema=./prisma/schema.prisma"
+    "prisma:generate": "yarn prisma generate --schema=./prisma/schema.prisma",
+    "dev": "concurrently \"tsc --watch\" \"tsc-alias --watch\" \"nodemon -q dist/index.js --exec 'node --es-module-specifier-resolution=node '\""
   },
   "dependencies": {
-    "@prisma/client": "^5.20.0",
-    "express": "^4.21.0",
-    "prisma": "^5.20.0"
+    "@azoom/nnn-router": "^2.0.0-beta.0.6",
+    "express": "^4.19.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.7.4",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.2"
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.14.6",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
+    "concurrently": "^7.6.0",
+    "eslint": "^8.42.0",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.3",
+    "typescript": "^4.9.5"
   }
 }
