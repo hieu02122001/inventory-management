@@ -1,5 +1,5 @@
 import express from 'express'
-import nnnRouter from '@azoom/nnn-router'
+import nnnRouter from 'nnn-router'
 import requestLogger from '@middleware/request-logger'
 import authHandler from '@middleware/auth'
 import checkPublicRoute from './middleware/check-public-route'

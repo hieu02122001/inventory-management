@@ -7,6 +7,8 @@
   "author": "Trung Hiếu Văn <trunghieuvan02@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "setup": "yarn setup:env",
+    "setup:env": "cp .env.template .env",
     "dcc": "docker-compose -f ./cicd/development/docker-compose.yaml",
     "dcc:up": "yarn dcc up -d",
     "dcc:down": "yarn dcc down",
@@ -15,10 +17,10 @@
     "dev": "concurrently \"tsc --watch\" \"tsc-alias --watch\" \"nodemon -q dist/index.js --exec 'node --es-module-specifier-resolution=node '\""
   },
   "dependencies": {
-    "@azoom/nnn-router": "^2.0.0-beta.0.6",
     "@prisma/client": "5.20.0",
     "@types/bcrypt": "^5.0.2",
     "express": "^4.19.2",
+    "nnn-router": "^1.1.7",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -35,7 +37,9 @@
     "prisma": "^5.7.0",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.3",
-    "typescript": "^4.9.5",
-    "zod-prisma-types": "phongnd39/zod-prisma-types#79bbef06737c379946cb5240ab0be59182fa2d2c"
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": "18"
   }
 }
