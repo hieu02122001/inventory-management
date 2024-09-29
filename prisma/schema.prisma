@@ -9,7 +9,7 @@ datasource db {
 
 model User {
   id              Int      @id @default(autoincrement())
-  username        String   @db.VarChar(255)
+  username        String   @unique @db.VarChar(255)
   passwordHash    String   @map("password_hash") @db.VarChar(255)
   role            Int      @db.TinyInt
   createdBy       Int?     @map("created_by")
@@ -92,4 +92,6 @@ model Withdrawal {
   updatedBy      Int?      @map("updated_by")
   createdDate    DateTime  @default(now()) @map("created_date")
   updatedDate    DateTime  @default(now()) @updatedAt @map("updated_date")
+
+  @@map("withdrawals")
 }

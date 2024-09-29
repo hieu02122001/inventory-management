@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@azoom/nnn-router": "^2.0.0-beta.0.6",
+    "@prisma/client": "5.20.0",
+    "@types/bcrypt": "^5.0.2",
     "express": "^4.19.2",
     "zod": "^3.23.8"
   },
@@ -26,11 +28,14 @@
     "@types/node": "^18.14.6",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
+    "bcrypt": "^5.1.1",
     "concurrently": "^7.6.0",
     "eslint": "^8.42.0",
     "nodemon": "^2.0.15",
+    "prisma": "^5.7.0",
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.3",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "zod-prisma-types": "phongnd39/zod-prisma-types#79bbef06737c379946cb5240ab0be59182fa2d2c"
   }
 }
